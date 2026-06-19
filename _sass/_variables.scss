@@ -1,0 +1,60 @@
+/* ==========================================================================
+   VARIABLES
+   ========================================================================== */
+
+/* Colors
+   ========================================================================== */
+
+$black:  #1a1812;
+$white: #e7e3d6;
+
+$grey-dark:   #3d3a30;
+$grey-medium: #6b6759;
+$grey-light:  #8f8b7d;
+
+$hilite: #596543;
+
+$link: #596543;
+$accent: #3d3a30;
+
+
+/* Typography
+   ========================================================================== */
+$sans: "Geo", "Helvetica Neue", "Arial", sans-serif;
+$serif: "Noto Serif", "Georgia", serif;
+
+   
+   
+/* Type Scale
+   ========================================================================== */
+/** * 12 & 16 as roots then powers of two. */
+$fs1:64px;
+$fs2:48px;
+$fs3:32px;
+$fs4:24px;
+$fsp:22px;
+$fs5:16px;
+$fs6:12px;
+
+// Line Height
+$lh: 33px;
+$lhsmall: 24px;
+
+// Sizing 
+$footerHeight: 320px;
+
+// Griddit
+/* Break Points
+   ========================================================================== */
+   
+/* Mobile */
+$breakpoint-1-max-width:480px;
+
+/* Tablet */
+$breakpoint-2-max-width:800px;
+$breakpoint-3-max-width:1200px;
+
+/* Style Tidbits
+   ========================================================================== */
+$borderR: 4px;
+
