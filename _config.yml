@@ -1,7 +1,8 @@
 title:            LA Solarpunk
 tagline:          Building a Bright Green Future in Los Angeles
 description:      A community hub for solarpunk ideas, projects, and organizing in Los Angeles — where ecology, technology, and mutual aid grow together.
-canonical:        http://la-solarpunk.github.io
+canonical:        https://la-solarpunk.github.io
+url:              https://www.lasolarpunk.com
 
 # Owner/author information
 owner:
