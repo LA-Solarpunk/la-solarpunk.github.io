@@ -33,7 +33,7 @@ The thing that genuinely surprised us was the native bees. Charles pointed out t
  
 **Why we went**
  
-We've been trying to get out more. A lot of what CRASH does happens at workbenches and on laptops, and that's great! But it's easy to lose the thread of why we're doing any of it. Spending a morning at a place like the Westwood Greenway, getting a little dirty and talking to someone who really knows the land, gave us a lot of perspective.
+We've been trying to get out more. A lot of what we do happens at workbenches and on laptops, and that's great! But it's easy to lose the thread of why we're doing any of it. Spending a morning at a place like the Westwood Greenway, getting a little dirty and talking to someone who really knows the land, gave us a lot of perspective.
  
 We're also just interested in what a longer-term relationship with the Greenway might look like. They're a small volunteer organization doing real work with not a lot of resources, which is exactly the kind of group we want to support. Nothing concrete yet, but we'll be going back.
  

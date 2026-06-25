@@ -192,6 +192,46 @@
         text-decoration: underline;
     }
 
+    .partner-cta {
+        background: #f0f4e8;
+        text-align: center;
+    }
+
+    .partner-cta h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+    }
+
+    .partner-cta p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #444;
+        max-width: 560px;
+        margin: 0 auto 1.5rem;
+    }
+
+    .cta-btn {
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        background: #5a8a3c;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background 0.2s;
+    }
+
+    .cta-btn:hover {
+        background: #6fa34a;
+    }
+
+    .cta-btn:visited {
+        color: #fff;
+    }
+
     /* ── Posts ── */
     .posts {
         background: #fff;
@@ -252,7 +292,7 @@
     <section class="hero">
         <div class="hero-text">
             <h1>{{ site.title | default: "CRASH" }}</h1>
-            <p>A Los Angeles collective exploring sustainable technology with and for community organizations.</p>
+            <p>A Los Angeles collective building sustainable technology for and with community organizations.</p>
         </div>
         <img class="hero-image" src="{{ site.baseurl }}/assets/img/hero_image.jpeg"
             alt="Los Angeles with green space (used with permission by FATBLINE on reddit)" />
@@ -280,29 +320,37 @@
             <div class="cards">
                 <div class="card">
                     <h3>Build with us</h3>
-                    <p>Browse our open source repositories, pick up an issue, and start contributing to active projects.
+                    <p>Browse our open source repositories to see what we're up to and learn about how to get involved.
                     </p>
                     <a class="card-btn" href="https://github.com/LA-Solarpunk/la-solarpunk.github.io"
                         target="_blank">View on GitHub</a>
                 </div>
                 <div class="card">
                     <h3>Come to an event</h3>
-                    <p>We meet regularly at our makerspace in LA. Build sessions, planning nights, and the occasional
+                    <p>We meet regularly at CRASH makerspace in LA. Build sessions, planning nights, and the occasional
                         field trip.</p>
                     <a class="card-btn" href="https://blog.crashspace.org/events/" target="_blank">See events</a>
                 </div>
                 <div class="card">
                     <h3>Join the conversation</h3>
-                    <p>Hop into our Discord to ask questions, follow along with projects, or just say hello. You can
-                        find us in the niche-topics section of the CRASH discord</p>
+                    <p>Hop into the CRASH Space Discord to ask questions, follow along with projects, or just say hello.
+                        You can
+                        find us in the niche-topics section under LA Solarpunk.</p>
                     <a class="card-btn" href="https://discord.gg/KcK4XkAdBw" target="_blank">Join Discord</a>
                 </div>
             </div>
-            <p class="contact-note">
-                Representing an organization that could use a technology build?
-                <a href="mailto:{{ site.email | default: 'lasolarpunk@gmail.com' }}">Reach out directly</a> — we're
-                always interested in new partnerships.
-            </p>
+
+        </div>
+    </section>
+
+    <section class="section partner-cta">
+        <div class="section-inner">
+            <p class="section-label">Work with us</p>
+            <h2>Does your organization need a technology build?</h2>
+            <p>We work with small community groups and mutual aid organizations in LA to build tools that actually solve
+                problems. We handle the technical work (and the fundraising where we can!) we just need your time to
+                help us understand what you need.</p>
+            <a class="cta-btn" href="mailto:lasolarpunk@gmail.com">Get in touch</a>
         </div>
     </section>
 
@@ -314,6 +362,7 @@
             {% if site.posts.size > 0 %}
             <ol class="post-list-home">
                 {% for post in site.posts %}
+                {% unless post.hidden %}
                 <li>
                     <p class="date">{{ post.date | date: "%B %d, %Y" }}</p>
                     <h3><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h3>
@@ -325,6 +374,7 @@
                         {% endif %}
                     </p>
                 </li>
+                {% endunless %}
                 {% endfor %}
             </ol>
             {% else %}
