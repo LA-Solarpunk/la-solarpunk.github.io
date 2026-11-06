@@ -15,7 +15,7 @@ generated — it is a list of every Markdown file in the repository.
 repository for Markdown files, reads each file's front-matter `title:`
 (or first heading), sorts the entries newest first by their
 `YYYY-MM-DD-` file-name prefix, and regenerates `index.md` in full:
-a heading followed by a plain Markdown list of entries. There are no
+a plain Markdown list of entries. There are no
 marker comments wrapping the list. Entries are wikilinks —
 `[[2026-06-21-westwood-greenway|Visiting the Westwood Greenway]]` —
 not standard Markdown links, so the renderer in `index.html` navigates

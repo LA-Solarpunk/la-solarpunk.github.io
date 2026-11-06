@@ -3,9 +3,7 @@
 
 index.md is fully generated -- there are no marker comments wrapping
 the list, so the file the renderer in index.html displays is simply
-the heading followed by a Markdown list:
-
-    # LA Solarpunk
+a Markdown list:
 
     - [[2026-06-21-westwood-greenway|Visiting the Westwood Greenway]] — 2026-06-21
     - [[2026-06-18-how-to-write-a-post|How to Write a Blog Post]] — 2026-06-18
@@ -46,7 +44,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 INDEX_FILE = ROOT / "index.md"
-HEADING = "# LA Solarpunk"
 
 # Directories that are never scanned for Markdown and never copied to
 # the deployable site. Anything hidden (``.git``, ``.github``, ...) is
@@ -174,12 +171,12 @@ def check_image_links(files: list[Path]) -> list[str]:
 
 
 def write_index(files: list[Path]) -> None:
-    """Write index.md as a heading followed by the generated list.
+    """Write index.md as the generated list.
 
     No marker comments: index.md is generated in full on every run,
     so old marker-wrapped files are replaced by the plain list.
     """
-    text = f"{HEADING}\n\n{render_list(files)}\n"
+    text = f"{render_list(files)}\n"
     INDEX_FILE.write_text(text, encoding="utf-8")
 
 
