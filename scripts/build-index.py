@@ -190,7 +190,13 @@ def build_site(files: list[Path], site_dir: Path) -> None:
     for path in sorted(ROOT.rglob("*")):
         if not path.is_file() or path.suffix.lower() == ".md":
             continue
-        if path.name.startswith(".") or is_skipped(path):
+        # .nojekyll is the one dotfile that must ship: it stops GitHub
+        # Pages' Jekyll build from converting .md files with front
+        # matter into .html (which deletes the .md the renderer
+        # fetches). All other dotfiles stay excluded.
+        if path.name != ".nojekyll" and (
+            path.name.startswith(".") or is_skipped(path)
+        ):
             continue
         include.append(path)
 
