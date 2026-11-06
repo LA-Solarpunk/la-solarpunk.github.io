@@ -1,138 +1,87 @@
-# Balzac
+# LA Solarpunk
 
-This is forked from [minimal mistakes](http://mademistakes.com). I needed some type of framework to build off as I have no experience with Jekyll. Michael set up an awesome dev environment for this which really helped speed up my progress. He also already wrote up an incredibly comprehensive readme.md so I basically copied all of it and replaced what was necessary. The design itself is my own and I cannot let you sell this or tweak the design for resale, unless I you [contact me](mailto:cole@coletownsend.com).
+A community hub for solarpunk ideas, projects, and organizing in Los
+Angeles — where ecology, technology, and mutual aid grow together.
 
+The site is plain Markdown plus a standalone `index.html` renderer
+(tiny-markdown) with all page styles in `styles.css` (linked from
+`index.html`): no database, no framework, no build step to install.
+`index.html` renders `index.md` in the browser, and `index.md` is
+generated — it is a list of every Markdown file in the repository.
 
-If you'd like give me credit somewhere on your blog or tweet a shout out to
-[@twnsndco](https://twitter.com/twnsndco), that would be pretty sweet. 
+## Build process
 
-If you feel like donating — [Give it a thought.](http://gtat.me/balzac/donate)
+`scripts/build-index.py` (Python 3, standard library only) scans the
+repository for Markdown files, reads each file's front-matter `title:`
+(or first heading), sorts the entries newest first by their
+`YYYY-MM-DD-` file-name prefix, and regenerates `index.md` in full:
+a heading followed by a plain Markdown list of entries. There are no
+marker comments wrapping the list. Entries are wikilinks —
+`[[2026-06-21-westwood-greenway|Visiting the Westwood Greenway]]` —
+not standard Markdown links, so the renderer in `index.html` navigates
+to them in-page. `index.md` is generated, so do not edit it by hand.
 
+Run it locally:
+
+```sh
+python3 scripts/build-index.py               # regenerate index.md
+python3 scripts/build-index.py --site-dir _site   # also assemble _site/
+```
+
+The generated `index.md` is committed, and the GitHub Actions workflow
+regenerates it on every push, so the published list never goes stale
+and nobody has to update it by hand. `_site/` is build output (see
+`.gitignore`) and is never committed.
+
+## Publishing (GitHub Pages)
+
+`.github/workflows/deploy.yml` runs on every push to `main` (and can be
+triggered manually from the Actions tab):
+
+1. **build** — checks out the repo, runs
+   `python3 scripts/build-index.py --site-dir _site`, and uploads
+   `_site/` (`index.html`, the generated `index.md`, every Markdown
+   file, and any static assets) as the Pages artifact.
+2. **deploy** — publishes that artifact with `actions/deploy-pages`.
+
+One-time setup, in the repository's **Settings → Pages**: set
+**Build and deployment → Source** to **GitHub Actions**. Without this
+the workflow's deployments go nowhere. After that, publishing is just:
+add or edit a Markdown file, push to `main`, wait about a minute.
+
+## Adding a post
+
+Create a Markdown file at the repository root named
+`YYYY-MM-DD-your-post-title.md`, for example
+`2026-06-21-westwood-greenway.md`, starting with front matter:
+
+```yaml
 ---
-
-
-![Balzac for Jekyll](http://cl.ly/Qdzo/Screen%20Shot%202013-08-05%20at%205.35.11%20PM.jpg)
-![Balzac for Jekyll](http://cl.ly/Qdyh/Screen%20Shot%202013-08-05%20at%205.30.01%20PM.jpg)
-
-## Features:
-- flexible, uses max-width for responsive goodness
-- responsive drop down menu
-- retina images using @2x
-- post loop in the footer showing 3 latest posts
-- custom portfolio page for case studies
-
-## Basic Setup
-
-1. [Install Jekyll](http://jekyllrb.com) if you haven't already.
-2. Download this bad boy.
-3.  Fork the [Balzac repo](http://github.com/coletownsend/balzac-for-jekyll/)
-4. Twerk it out so it's just for you.
-5.  ???
-6.  Profit
-
-## [Preview the Theme](http://jekyll.gtat.me)
-=======
- [Preview the Theme](http://jekyll.gtat.me)
- 
-``` bash
-balzac-for-jekyll/
-├── _includes
-|    ├── footer.html  //site footer
-|    ├── head.html  //site head
-|    ├── head-dark.html  //dark site head for light pages
-├── _layouts
-|    ├── home.html  //homepage layout
-|    ├── page.html  //page layout
-|    ├── post-index.html  //post listing layout
-|    └── post.html  //post layout
-|    ├── post-no-feature.html  //feature image-less post layout
-├── _posts
-├── assets
-|    ├── css  //preprocessed less styles. good idea to minify
-|    ├── img  //images and graphics used in css and js
-|    ├── js
-|    |   ├── main.js  //jQuery plugins and settings
-|    |   └── vendor  //all 3rd party scripts
-|    └── sass 
-├── images  //images for posts and pages
-├── about.md  //about page
-├── articles.md  //lists all posts from latest to oldest
-└── index.md  //homepage. lists 5 most recent posts
+title: "Your Post Title"
+date: 2026-06-21
+description: "A short description of the post."
+---
 ```
 
-# Customization
+`index.html` shows a note's front matter at the top of the note: a
+`title` is rendered as `<h1>{{title}}</h1>`, and a `date`, when present,
+as `<h3>{{date}}</h3>` directly underneath it. Notes without those
+fields get no header.
 
-## _config.yml
+Write the post in standard Markdown below the front matter, commit,
+and push. The next workflow run picks the file up automatically and it
+appears in the `index.md` list — no other file needs editing.
 
-Most of the variables found here are used in the .html files found in `_includes` if you need to add or remove anything. A good place to start would be to change the title, tagline, description, and url of your site. When working locally comment out `url` or else you will get a bunch of broken links because they are absolute and prefixed with `{{ site.url }}` in the various `_includes` and `_layouts`. Just remember to uncomment `url` when building for deployment or pushing to **gh-pages**...
+## Images and other embeds
 
-### Owner/Author Information
+Use wikilink embed style, with the alt/caption text after the pipe:
 
-Change your name, bio, Twitter url, email, Dribbble URL, etc.
-
-
-### Top Navigation Links
-
-Edit page/post titles and URLs to include in the site's navigation. For external links add `external: true`.
-
-``` yaml
-# sample top navigation links
-links:
-  - title: About Page
-    url: /about
-  - title: Other Page
-    url: /other-page
-  - title: External Page
-    url: http://coletownsend.com
-    external: true
+```markdown
+![[charles_teaching.jpg|charles teaching]]
 ```
 
-## Other Stuff
-
-The rest is just your average Jekyll config settings. Nothing too crazy here...
-
-### _includes
-
-For the most part you can leave these as is since the author/owner details are pulled from `_config.yml`. That said you'll probably want to customize the copyright stuff in `footer.html` to your liking.
-
-### Adding Posts and Pages
-
-There are two main content layouts: `post.html` (for posts) and `page.html` (for pages). Both have large **feature images** that span the full-width of the screen, and both are meant for text heavy blog posts (or articles). 
-
-### Feature Images
-
-A good rule of thumb is to keep feature images nice and wide so you don't push the body text too far down. An image cropped around around 1024 x 256 pixels will keep file size down with an acceptable resolution for most devices. 
-
-``` yaml
-image:
-# local image 
-  feature: feature-image-filename.jpg
-# link image
-  feature: "http(s)://image.domain.com/feature-image-filename.jpg"
-```
-
-This makes the assumption that the feature image is in the *images* folder unless it has a link address. To add a feature image to a post or page just include the filename in the front matter like so.
-You can "serve" images responsively with retina.js. All you need to do is have a file with @2x before the file type. That should be placed in the *images* folder. You literally don't have to do anything other than that. 2 copies. One is linked. That's it.
-Ex:
-`cool-photo@2x.jpg` 
-
-**There is a default feature image that will show up for and posts. It isn't retina or anything. It's just there in case you want one but forget <3*
-
-#### If you don't want a feature image
-…just say so in the front-matter. Go to your-post-name.md and make sure it has this guy up top.
-```
-layout: post-no-feature
-```
-
-### Categories
-
-In the sample `_posts` folder you may have noticed `category: articles` in the front matter. I like keeping all posts grouped in the same folder. If you decide to rename or add categories you will need to modify the permalink in `articles.md` along with the filename (if renaming).
-
-For example. Say you want to group all your posts under `blog/` instead of `articles/`. In your post add `category: blog` to the front matter, rename or duplicate `articles.md` to `blog.md` and change the permalink in that file to `permalink: /blog/index.html`.
-
-If done correctly `/blog` should be a page listing all the site's posts.
-
-
-## License
-
-This is free to use, fork, do whatever you want. Please *do not* sell this design though. You don't need to link me to it, but please contact me if you intend to market this theme. I am releasing premium versions of this design for select CMS's. 
+Put the image file in the repository (at the root, or in a subfolder
+the embed path points into) and reference it by that path. The same
+`![[ ]]` form is used for video and audio files. Standard Markdown
+images and `<img>` tags are not used in this site — the build fails if
+it finds one, or an embed pointing at a file that does not exist.

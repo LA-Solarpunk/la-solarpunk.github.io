@@ -1,0 +1,138 @@
+/* styles.css — all page styles for index.html.
+ *
+ * Moved out of the <style> block in index.html; index.html now
+ * loads this file with <link rel="stylesheet" href="styles.css">.
+ * The tiny-markdown component's own utility CSS remains embedded
+ * in its inlined script in index.html.
+ */
+
+/* ==================== STYLE EDIT: variables ==================== */
+/* Starting point adapted from dataroom-theme.css. Everything the
+   page look depends on is here — restyle by changing these knobs. */
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@400&family=Anuphan:wght@400;500&family=Cactus+Classical+Serif:wght@400&display=swap');
+
+:root {
+  /* Colors */
+  --foreground: #1a1812;
+  --background: #e7e3d6;
+  --accent: #19430b;
+  --secondary: #112a0c;
+  --surface: #dcd8cb;
+  --surface-alt: #d2cec0;
+  --muted: #6b6759;
+  --border: #8f8b7d;
+  --highlight: #19430b;
+  --neutral-1: #6b6759;
+  --neutral-2: #8f8b7d;
+  --neutral-3: #dcd8cb;
+  --foreground-dim: #000000;
+  --background-light: #ffffff;
+  --background-dark: #d4cdb6;
+  --highlight-bright: #154b03;
+  --highlight-dim: #1d3b13;
+  --secondary-bright: #0e2e08;
+  --secondary-dim: #142610;
+  --neutral-1-lighter: #878270;
+  --neutral-3-darker: #c7c1ad;
+  --accent-red: #430b0b;
+  --accent-green: #0b430b;
+  --accent-blue: #0b0b43;
+  --accent-yellow: #43430b;
+  --accent-purple: #300b43;
+  --accent-cyan: #0b4343;
+
+  /* Fonts */
+  --font-header: 'Bitcount Grid Single', fantasy;
+  --font-ui: 'Anuphan', sans-serif;
+  --font-mono: 'Cactus Classical Serif', serif;
+  --font-weight-h1: 400;
+  --font-weight-h2: 400;
+  --font-weight-h3: 400;
+  --font-weight-body: 500;
+  --font-size-h1: 32px;
+  --font-size-h2: 24px;
+  --font-size-h3: 18px;
+  --font-size-body: 16px;
+}
+/* ================== END STYLE EDIT: variables ================== */
+
+/* =================== STYLE EDIT: html styles =================== */
+/* Basic page styles. Shape the reading column, typography and
+   chrome here. */
+html {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.logo {
+  padding: 0;
+  margin: 0;
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  line-height: 1.6;
+  text-shadow: var(--text-shadow);
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-header);
+  color: var(--color-heading);
+  text-shadow: none;
+}
+
+h1 { font-size: var(--font-size-h1); font-weight: var(--font-weight-h1); }
+h2 { font-size: var(--font-size-h2); font-weight: var(--font-weight-h2); }
+h3 { font-size: var(--font-size-h3); font-weight: var(--font-weight-h3); }
+
+a {
+  color: var(--color-link);
+  text-decoration-color: var(--highlight);
+}
+
+a:hover { color: var(--color-link-hover); }
+
+::selection { background: var(--selection); }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 1.5em 0;
+}
+
+mark-down {
+  display: block;
+  max-width: 48rem;
+  margin: auto;
+
+}
+
+/* Note header, generated from front matter by the script below:
+   <h1 class="note-title"> for "title", and directly underneath
+   it <h3 class="note-date"> for "date". */
+mark-down > .note-title {
+  margin-bottom: 0.15em;
+}
+
+mark-down > .note-date {
+  margin-top: 0;
+  color: var(--muted);
+}
+/* ================== END STYLE EDIT: html styles ================= */
+/* The component's own utility styles (headings, code blocks,
+   blockquotes, wikilink transitions, ...) are embedded in the
+   inlined tiny-markdown script in index.html — they stay there,
+   everything else lives in this file. */
